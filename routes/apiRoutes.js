@@ -3,9 +3,9 @@ require("mongoose");
 
 
 module.exports = (app) => {
-// creates new workout in database
-    app.post("/api/workouts", (req, res) => {
-        db.Workout.create({})
+//retrieves last workouts
+    app.get("/api/workouts", (req, res) => {
+        db.Workout.find({})
             .then(dbWorkout => {
                 res.json(dbWorkout);
             })
@@ -14,9 +14,9 @@ module.exports = (app) => {
             });
     });
 
-//retrieves last workouts
-    app.get("/api/workouts", (req, res) => {
-        db.Workout.find({})
+// creates new workout in database
+    app.post("/api/workouts", (req, res) => {
+        db.Workout.create({})
             .then(dbWorkout => {
                 res.json(dbWorkout);
             })
