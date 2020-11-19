@@ -3,7 +3,7 @@ require("mongoose");
 
 
 module.exports = (app) => {
-
+// creates new workout in database
     app.post("/api/workouts", (req, res) => {
         db.Workout.create({})
             .then(dbWorkout => {
@@ -14,7 +14,7 @@ module.exports = (app) => {
             });
     });
 
-
+//retrieves last workouts
     app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
             .then(dbWorkout => {
@@ -26,7 +26,7 @@ module.exports = (app) => {
     });
 
 
-
+//adds exercise to workout
     app.put("/api/workouts/:id", (req, res) => {
         db.Workout.findByIdAndUpdate(
             req.params.id, { $push: { exercises: req.body } }, { new: true, runValidators: true })
@@ -43,9 +43,6 @@ module.exports = (app) => {
 
     app.get("/api/workouts/range", (req, res) => {
         db.Workout.find({}).limit(7).then(data => res.json(data))
-            // .then(dbWorkout => {
-            //     res.json(dbWorkout);
-            // })
             .catch(err => {
                 res.status(400).json(err);
             });
